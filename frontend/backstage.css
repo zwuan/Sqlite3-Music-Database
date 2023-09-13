@@ -1,0 +1,28 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+html, body {
+    height: 100%;
+}
+body {
+    background: #fff1dc;
+    font-family: 'Roboto Mono', Arial, sans-serif;
+    font-size: 3vw;
+    color: radial-gradient(#111628, #0b0f1d);
+    text-align: center;
+}
+.btn{
+    font-size: small;
+    width: 150px;
+    height: 40px;
+    display: block;
+    justify-content: center;
+    cursor: pointer;
+    line-height: 40px;
+    color: #000;
+    background-color: transparent;
+    border: 1px solid #000;
+    transition: all .3s linear;
+}
