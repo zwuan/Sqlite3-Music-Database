@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <script>
+            function back(){
+                window.location.href = "backstage.html";
+            }
+            let music = async() => {
+                let id = document.getElementById("id");
+                let title = document.getElementById("title");
+                let genre = document.getElementById("genre");
+                let year = document.getElementById("year");
+                let language = document.getElementById("language");
+                if(id.value == "" || title.value == "" || genre.value == "" || year.value == "" || language.value == ""){
+                    window.alert("Please complete all the blanks!");
+                    return;
+                }
+                let status = 0;
+                let message = "";
+                var url = "http://127.0.0.1:5000/addSong/" + id.value + "/" + title.value + "/" + genre.value + "/" + year.value + "/" + language.value;
+                let res = await fetch(url, {
+                    method: "GET",
+                }).then(res => {
+                    status = res.status;
+                    return res.text();
+                }).catch(error => {
+                    message = "Error!";
+                });
+
+                if(status == 200 || status == 201){
+                    if(res == "success add"){
+                        window.alert("Success!");
+                        window.location.href = "music.html";
+                    }
+                    else{
+                        window.alert("Failed!");
+                    }
+                }
+                else{
+                    window.alert(res.message);
+                }
+            }
+        </script>
+        <link rel="stylesheet" href="backstage.css">
+        <title>Music</title>
+    </head>
+    <body>
+        <h1>Music</h1>
+        <input type="text" id="id" placeholder="song id">
+        <input type="text" id="title" placeholder="title">
+        <input type="text" id="genre" placeholder="genre">
+        <input type="text" id="year" placeholder="release year">
+        <input type="text" id="language" placeholder="language">
+        <center>
+            <div class="btn" onclick="music()">add</div>
+            <div class="btn" onclick="back()">return</div>
+        </center>
+    </body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <script>
+            function back(){
+                window.location.href = "backstage.html";
+            }
+            let updateac = async() => {
+                let id = document.getElementById("id");
+                let name = document.getElementById("name");
+                if(id.value == "" || name.value == ""){
+                    window.alert("Please complete all the blanks!");
+                    return;
+                }
+                let status = 0;
+                let message = "";
+                var url = "http://127.0.0.1:5000/updateUser/" + id.value + "/" + name.value;
+                let res = await fetch(url, {
+                    method: "GET",
+                }).then(res => {
+                    status = res.status;
+                    return res.text();
+                }).catch(error => {
+                    message = "Error!";
+                });
+
+                if(status == 200 || status == 201){
+                    if(res.length <= 0){
+                        window.alert("Account does not exist!");
+                    }
+                    else{
+                        if(res == "success update"){
+                            window.alert("Success!");
+                            window.location.href = "member.html";
+                        }
+                        else{
+                            window.alert("Failed!");
+                        }
+                    }
+                }
+                else{
+                    window.alert(result.message);
+                }
+            }
+            let deleteac = async() => {
+                let id = document.getElementById("id");
+                if(id.value == ""){
+                    window.alert("Please fill in the account!");
+                    return;
+                }
+                let status = 0;
+                let message = "";
+                var url = "http://127.0.0.1:5000/delete/" + id.value;
+                let res = await fetch(url, {
+                    method: "GET",
+                }).then(res => {
+                    status = res.status;
+                    return res.text();
+                }).catch(error => {
+                    message = "Error!";
+                });
+
+                if(status == 200 || status == 201){
+                    if(res.length <= 0){
+                        window.alert("Account does not exist!");
+                    }
+                    else{
+                        if(res == "successful delete."){
+                            window.alert("Success!");
+                            window.location.href = "member.html";
+                        }
+                        else{
+                            window.alert("Failed!");
+                        }
+                    }
+                }
+                else{
+                    window.alert(res.message);
+                }
+            }
+        </script>
+        <link rel="stylesheet" href="backstage.css">
+        <title>Member</title>
+    </head>
+    <body>
+        <h1>Member</h1>
+        <input type="text" id="id" placeholder="account">
+        <input type="text" id="name" placeholder="name">
+        <center>
+            <div class="btn" onclick="updateac()">update</div>
+            <div class="btn" onclick="deleteac()">delete</div>
+            <div class="btn" onclick="back()">return</div>
+        </center>
+    </body>
+</html>

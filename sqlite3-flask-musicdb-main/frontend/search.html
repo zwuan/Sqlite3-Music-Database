@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>查詢</title>
+</head>
+
+<body>
+    <div class = "title">
+        <h1 id="page"></h1>  <!--//"page_title"-->
+        <h1>歌曲查詢</h1>
+        <p>請輸入想要搜尋的歌曲</p>
+    </div>
+    
+    <div class="nax">
+        <form class="song_form" action="#" onsubmit="PersonFunc(); return false">
+            <select id="PersonType">
+                <option value="Song">歌曲(Song)</option>
+                <option value="Artist">歌手(Artist)</option>
+                <option value="Producer">製作人(Producer)</option>
+                <option value="SongWriter">作曲家(SongWriter)</option>
+            </select>
+            <div>
+                <label>
+                    輸入名稱：
+                </label>
+                <input type="text" name="SearchName" id="Name">
+            </div>
+            <button>提交</button>
+        </form>
+        <input id="subscribeArtist" type="button" value="subscribe_Artist" onclick="subscribeArtist();" />
+        <input id="subscribeProducer" type="button" value="subscribe_Producer" onclick="subscribeProducer();" />
+        <input id="subscribeSongWriter" type="button" value="subscribe_SongWriter" onclick="subscribeSongWriter();" />
+        <form>
+            
+        </form>
+        
+        <form class="song_form" action="#" onsubmit="ListFunc(); return false">
+            <select id="ListType">
+                <option value="listSong">查看訂閱歌曲清單(listSong)</option>
+                <option value="listArtist">查看訂閱歌手清單(listArtist)</option>
+                <option value="listSongWriter">查看訂閱作曲者清單(listSongWriter)</option>
+                <option value="listProducer">查看訂閱製作人清單(listProducer)</option>
+            </select>
+            <div>
+                <label>
+                    搜尋訂閱：
+                </label>
+                <input type="text" name="ListId" id="ListId">
+            </div>
+            <button>提交</button>
+        </form>
+    </div>
+    <div id="content"></div>
+</body>
+
+</html>
+<script src="search.js"></script>
+
+
+<style>
+    
+    body{
+        background-color: rgb(71, 177, 238);
+    }
+    .title{
+        margin-left: 45%;
+    }
+    .nax{
+        width: 393px;
+        height: 207px;
+        border: 1px solid rgb(154, 154, 154);
+        /* border-radius: 5px; */
+        margin: 0 0 0 560px;
+
+    }
+    #subscribeArtist,#subscribeProducer,#subscribeSongWriter{
+        display: block;
+        float: left;
+    }
+    #Name,#ListId{
+        width: 275px;
+    }
+    .search{
+        margin: 150px 0 0 560px;
+    }
+    table.blueTable {
+        border: 1px solid #1C6EA4;
+        background-color: #EEEEEE;
+        width: 400px;
+        margin-top: 20px;
+        text-align: left;
+        border-collapse: collapse;
+    }
+    
+    table.blueTable td,
+    table.blueTable th {
+        border: 1px solid #AAAAAA;
+        padding: 3px 2px;
+    }
+    
+    table.blueTable tbody td {
+        font-size: 13px;
+    }
+    
+    table.blueTable tr:nth-child(even) {
+        background: #D0E4F5;
+    }
+    
+    table.blueTable thead {
+        background: #1C6EA4;
+        background: -moz-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+        background: -webkit-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+        background: linear-gradient(to bottom, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+        border-bottom: 2px solid #444444;
+    }
+    
+    table.blueTable thead th {
+        font-size: 15px;
+        font-weight: bold;
+        color: #FFFFFF;
+        border-left: 2px solid #D0E4F5;
+    }
+    
+    table.blueTable thead th:first-child {
+        border-left: none;
+    }
+    
+    table.blueTable tfoot td {
+        font-size: 14px;
+    }
+    
+    table.blueTable tfoot .links {
+        text-align: right;
+    }
+    
+    table.blueTable tfoot .links a {
+        display: inline-block;
+        background: #1C6EA4;
+        color: #FFFFFF;
+        padding: 2px 8px;
+        border-radius: 5px;
+    }
+    
+    .song_form {
+        width: 373px;
+        background-color: rgba(255, 255, 255, 0.7);
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        border-radius: 5px;
+    }
+    
+    .song_form div {
+        display: flex;
+        justify-content: space-between;
+        margin: 5px;
+    }
+    
+    .btn {
+        margin: 10px 0 0 0;
+    }
+</style>
+
